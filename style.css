@@ -1,0 +1,216 @@
+body {
+    background-image: url("https://i.pinimg.com/736x/dc/d3/cc/dcd3ccbea3a2d80c282556f683251e86.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    opacity: 0.9;
+    margin: 0;
+    font-family: 'Comic Sans MS', sans-serif;
+}
+
+nav {
+    height: 70px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    color: white;
+    font-size: 26px;
+    border-bottom: 3px solid white;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 5px 10px rgba(255, 255, 255, 0.2);
+}
+
+nav:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+nav input {
+    height: 42px;
+    width: 320px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    border: 1px solid white;
+    background: transparent;
+    color: white;
+    transition: 0.3s;
+    font-size: 18px;
+}
+
+nav input::placeholder {
+    color: white;
+}
+
+nav button {
+    height: 48px;
+    width: 110px;
+    font-size: 20px;
+    color: white;
+    background: linear-gradient(45deg, #22DD22, #22DD22);
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 0 15px rgba(255, 87, 51, 0.7);
+}
+
+nav button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255, 87, 51, 1);
+}
+
+section h2 {
+    color: white;
+    font-size: 45px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-align: center;
+    margin-top: 15px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.moviecontainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 30px auto;
+    width: 80%;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    padding: 55px;
+    transition: 0.3s;
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+    animation: slideIn 1s ease-in-out;
+}
+
+.moviecontainer:hover {
+    transform: scale(1.03);
+}
+
+.movie-poster {
+    flex: 1;
+    text-align: center;
+}
+
+.movie-poster img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 5px 5px 20px rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s;
+}
+
+.movie-poster img:hover {
+    transform: scale(1.05);
+}
+
+.movie-info {
+    flex: 2;
+    padding-inline: 20px;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 1.2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.movie-info h2 {
+    color: #FBFC9C;
+    font-size: 36px;
+    margin-bottom: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.movie-info p {
+    font-size: 18px;
+    margin-block: 12px;
+    line-height: 28px;
+}
+
+.movie-info .movie-genre {
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.movie-info .movie-genre p {
+    background: linear-gradient(135deg, #ffffff, #aaaaaa);
+    color: #111;
+    padding: 6px 14px;
+    margin: 6px;
+    border: 2px solid #000;
+    border-radius: 8px;
+    font-weight: 800;
+    transition: transform 0.3s;
+}
+
+.movie-info .movie-genre p:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@media screen and (max-width: 950px) {
+    .moviecontainer {
+        flex-direction: column;
+        align-items: center;
+    }
+    .movie-poster img {
+        width: 100%;
+        height: auto;
+        border-radius: 12px 12px 0 0;
+    }
+    .movie-info {
+        padding-inline: 30px;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 630px) {
+    nav {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        padding: 15px;
+    }
+    nav input {
+        width: 250px;
+        margin-bottom: 10px;
+    }
+    nav button {
+        width: 100%;
+        margin-top: 10px;
+    }
+    .moviecontainer {
+        padding: 30px;
+        width: 90%;
+    }
+    .movie-poster img {
+        width: 100%;
+        max-width: 100%;
+        border-radius: 12px;
+    }
+    .movie-info {
+        padding-inline: 15px;
+        font-size: 16px;
+        text-align: center;
+    }
+}
