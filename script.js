@@ -31,32 +31,33 @@ const showMovieData = (data) => {
 
     const { Title, imdbRating, Genre, Released, Runtime, Actors, Plot, Poster } = data;
 
-    const movieElement = document.createElement("div");
-    movieElement.classList.add("movie-info");
+    const movieElement = document.createElement('div');
+    movieElement.classList.add('movie-info');
     movieElement.innerHTML = `
         <h2>${Title}</h2>
-        <p><strong>Rating: &#11088;</strong> ${imdbRating}</p>
+        <p><strong>Rating: &#11088;</strong> ${imdbRating || "N/A"}</p>
     `;
 
-    const movieGenreElement = document.createElement("div");
-    movieGenreElement.classList.add("movie-genre");
-    Genre.split(",").forEach((genre) => {
-        const p = document.createElement("p");
-        p.innerText = genre.trim();
+    const movieGenreElement = document.createElement('div');
+    movieGenreElement.classList.add('movie-genre');
+    Genre.split(",").forEach(element => {
+        const p = document.createElement('p');
+        p.innerText = element.trim();
         movieGenreElement.appendChild(p);
     });
 
     movieElement.appendChild(movieGenreElement);
+
     movieElement.innerHTML += `
-        <p><strong>Released Date:</strong> ${Released}</p>
-        <p><strong>Duration:</strong> ${Runtime}</p>
-        <p><strong>Cast:</strong> ${Actors}</p>
-        <p><strong>Plot:</strong> ${Plot}</p>
+        <p><strong>Released Date:</strong> ${Released || "N/A"}</p>
+        <p><strong>Duration:</strong> ${Runtime || "N/A"}</p>
+        <p><strong>Cast:</strong> ${Actors || "N/A"}</p>
+        <p><strong>Plot:</strong> ${Plot || "N/A"}</p>
     `;
 
-    const moviePosterElement = document.createElement("div");
-    moviePosterElement.classList.add("movie-poster");
-    moviePosterElement.innerHTML = `<img src="${Poster}" alt="Movie Poster"/>`;
+    const moviePosterElement = document.createElement('div');
+    moviePosterElement.classList.add('movie-poster');
+    moviePosterElement.innerHTML = `<img src="${Poster !== "N/A" ? Poster : 'fallback.jpg'}" alt="Movie Poster"/>`;
 
     movieContainer.appendChild(moviePosterElement);
     movieContainer.appendChild(movieElement);
@@ -68,10 +69,10 @@ const showErrorMessage = (message) => {
 };
 
 // Adding event listener to the form
-searchForm.addEventListener("submit", (e) => {
+searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const movieName = inputBox.value.trim();
-    if (movieName) {
+    if (movieName !== '') {
         getMovieInfo(movieName);
     } else {
         showErrorMessage("Enter a movie name to get movie info.");
