@@ -1,12 +1,12 @@
-const searchForm = document.querySelector("form");
-const movieContainer = document.querySelector(".moviecontainer");
-const inputBox = document.querySelector(".inputbox");
+const searchform = document.querySelector("form");
+const moviecontainer = document.querySelector(".moviecontainer");
+const inputbox = document.querySelector(".inputbox");
 
 // Function to fetch movie details using OMDB API
-const getMovieInfo = async (movie) => {
+const getmovieinfo = async (movie) => {
     try {
-        const apiKey = "321cc6c1";
-        const url = `https://www.omdbapi.com/?apikey=${apiKey}&t=${encodeURIComponent(movie)}`;
+        const apikey = "321cc6c1";
+        const url = `http://www.omdbapi.com/?apikey=${apikey}&t=${movie}`;
         const response = await fetch(url);
 
         if (!response.ok) {
@@ -19,15 +19,15 @@ const getMovieInfo = async (movie) => {
             throw new Error("Movie not found.");
         }
 
-        showMovieData(data);
+        showmoviedata(data);
     } catch (error) {
-        showErrorMessage(error.message);
+        showerrormessage(error.message);
     }
 };
 
 // Function to display movie data
-const showMovieData = (data) => {
-    movieContainer.innerHTML = "";
+const showmoviedata = (data) => {
+    moviecontainer.innerHTML = "";
 
     const { Title, imdbRating, Genre, Released, Runtime, Actors, Plot, Poster } = data;
 
@@ -35,47 +35,46 @@ const showMovieData = (data) => {
     movieElement.classList.add('movie-info');
     movieElement.innerHTML = `
         <h2>${Title}</h2>
-        <p><strong>Rating: &#11088;</strong> ${imdbRating || "N/A"}</p>
+        <p><span class="title">Rating:</span>; ${imdbRating}</p>
     `;
 
-    const movieGenreElement = document.createElement('div');
-    movieGenreElement.classList.add('movie-genre');
+    const moviegenreElement = document.createElement('div');
+    moviegenreElement.classList.add('movie-genre');
     Genre.split(",").forEach(element => {
         const p = document.createElement('p');
         p.innerText = element.trim();
-        movieGenreElement.appendChild(p);
+        moviegenreElement.appendChild(p);
     });
 
-    movieElement.appendChild(movieGenreElement);
+    movieElement.appendChild(moviegenreElement);
 
     movieElement.innerHTML += `
-        <p><strong>Released Date:</strong> ${Released || "N/A"}</p>
-        <p><strong>Duration:</strong> ${Runtime || "N/A"}</p>
-        <p><strong>Cast:</strong> ${Actors || "N/A"}</p>
-        <p><strong>Plot:</strong> ${Plot || "N/A"}</p>
+        <p><span class="title">Released Date:</span> ${Released}</p>
+        <p><span class="title">Duration:</span> ${Runtime}</p>
+        <p><span class="title">Cast:</span> ${Actors}</p>
+        <p><span class="title">Plot:</span> ${Plot}</p>
     `;
 
-    const moviePosterElement = document.createElement('div');
-    moviePosterElement.classList.add('movie-poster');
-    moviePosterElement.innerHTML = `<img src="${Poster !== "N/A" ? Poster : 'fallback.jpg'}" alt="Movie Poster"/>`;
+    const movieposterelement = document.createElement('div');
+    movieposterelement.classList.add('movie-poster');
+    movieposterelement.innerHTML = `<img src="${Poster}" alt="Movie Poster"/>`;
 
-    movieContainer.appendChild(moviePosterElement);
-    movieContainer.appendChild(movieElement);
+    moviecontainer.appendChild(movieposterelement);
+    moviecontainer.appendChild(movieElement);
 };
 
 // Function to display error message
-const showErrorMessage = (message) => {
-    movieContainer.innerHTML = `<h2>${message}</h2>`;
+const showerrormessage = (message) => {
+    moviecontainer.innerHTML = `<h2>${message}</h2>`;
 };
 
 // Adding event listener to the form
-searchForm.addEventListener('submit', (e) => {
+searchform.addEventListener('submit', (e) => {
     e.preventDefault();
-    const movieName = inputBox.value.trim();
-    if (movieName !== '') {
-        getMovieInfo(movieName);
+    const moviename = inputbox.value.trim();
+    if (moviename !== '') {
+        getmovieinfo(moviename);
     } else {
-        showErrorMessage("Enter a movie name to get movie info.");
+        showerrormessage("Enter a movie name to get movie info.");
     }
 });
-
